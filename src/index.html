@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PowerJS</title>
+</head>
+<body>
+    <h1 class="title">PowerJS</h1>
+    <h1 class="heading">Data Interpolation</h1>
+    <div class="component">
+        <h1>Greetings ${firstname} ${lastname}</h1>
+        <p>Hey ${firstname}, didn't think that you can interpolate</p>
+    </div>
+
+    <h1 class="heading">Component Injection</h1>
+    <div id="render-div"></div>
+
+    <h1 class="heading">Conditional Rendering</h1>
+    <div>
+        <div class="conditional-block">
+            <h1>Woah, please hide me</h1>
+        </div>
+    
+        <button class="conditional-button">Toggle</button>
+    </div>
+
+    <h1 class="heading">State Example</h1>
+    <div>
+        <h1 id="counter">Count: ${count.data}</h1>
+
+        <button class="increment-button">Increment</button>
+    </div>
+
+    <h1 class="heading">State Example</h1>
+    <div>
+        <h1 id="textDisplay">Hello ${name.data}</h1>
+        <input type="text">
+    </div>
+
+    <script src="./app.js"></script>
+    <style>
+        .title {
+            color: lightblue;
+            text-decoration: underline;
+        }
+
+        body {
+            font-family: Consolas, monospace;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        .heading {
+            text-decoration: underline;
+        }
+
+        div {
+            margin: 10px;
+        }
+
+        button, input {
+            font-size: 20px;
+            padding: 10px;
+        }
+    </style>
+</body>
+</html>
