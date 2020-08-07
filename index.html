@@ -11,8 +11,8 @@
     <h1 class="heading">PowerJS</h1>
     <h1 class="heading">Data Interpolation</h1>
     <div class="component">
-        <h1>Greetings ${firstname} ${lastname}</h1>
-        <p>Hey ${firstname}, didn't think that you can interpolate</p>
+        <h1>Greetings ${data.firstname} ${data.lastname}</h1>
+        <p>Hey ${data.firstname}, didn't think that you can interpolate</p>
     </div>
 
     <h1 class="heading">Component Injection</h1>
@@ -29,18 +29,18 @@
 
     <h1 class="heading">State Example</h1>
     <div>
-        <h1 id="counter">Count: ${count.data}</h1>
+        <h1 id="counter">Count: ${data.count.value}</h1>
 
         <button class="increment-button">Increment</button>
     </div>
 
     <h1 class="heading">State Example</h1>
     <div>
-        <h1 id="textDisplay">Hello ${name.data}</h1>
+        <h1 id="textDisplay">Hello ${data.name.value}</h1>
         <label>Enter Name: <input type="text"></label>
     </div>
 
-    <script src="./app.js"></script>
+    <script defer type="module" src="./main.js"></script>
     <style>
         body {
             font-family: Consolas, monospace;
