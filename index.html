@@ -21,7 +21,12 @@
     <h1 class="heading">Conditional Rendering</h1>
     <div>
         <div class="conditional-block">
-            <h1>Woah, please hide me</h1>
+            <div class="truth-block">
+                <h1>Hello Truthy</h1>
+            </div>
+            <div class="false-block">
+                <h1>Hello Falsy</h1>
+            </div>
         </div>
     
         <button class="conditional-button">Toggle</button>
@@ -41,25 +46,10 @@
     </div>
 
     <script defer type="module" src="./main.js"></script>
-    <style>
-        body {
-            font-family: Consolas, monospace;
-            font-size: 20px;
-            text-align: center;
-        }
-
-        .heading {
-            text-decoration: underline;
-        }
-
-        div {
-            margin: 10px;
-        }
-
-        button, input {
-            font-size: 20px;
-            padding: 10px;
-        }
-    </style>
 </body>
+<style>
+    * {
+        font-family: Consolas, monospace;
+    }
+</style>
 </html>

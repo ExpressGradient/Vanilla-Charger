@@ -33,9 +33,10 @@ input.addEventListener("input", (event) => {
     name["value"] = event.target.value;
 });
 
-let tempHook = hook(".conditional-block");
+let truthBlock = hook('.truth-block');
+let falseBlock = hook('.false-block')
 
-let conditionalBlock = conditionalHook(".conditional-block", condition, tempHook.innerHTML, "");
+let conditionalBlock = conditionalHook(".conditional-block", condition, truthBlock, falseBlock);
 
 let conditionalButton = hook(".conditional-button");
 

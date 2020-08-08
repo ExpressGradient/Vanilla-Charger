@@ -1,5 +1,5 @@
 // PowerJS starts here..
-import { data } from "./main.js";
+import { data } from './main.js';
 
 export const hook = (element) => {
     const domElement = document.querySelector(element);
@@ -29,35 +29,33 @@ export const store = (value) => {
         subscribers: []
     };
 
-    let proxyState = new Proxy(state, {
+    return new Proxy(state, {
         get: (target, prop) => target[prop],
         set: (target, prop, inputValue) => {
-            if(prop === "value") {
+            if (prop === "value") {
                 target[prop] = inputValue;
                 target["subscribers"].forEach(subscriber => updateHook(subscriber, subscriber.rawDOM));
 
                 // Uncomment the below for debugging
                 // console.log("State: ", target[prop]);
-            } else if(prop === "subscribers") {
+            } else if (prop === "subscribers") {
                 target[prop] = inputValue;
             }
             return true;
         }
     });
-
-    return proxyState;
 }
 
 export const conditionalHook = (element, condition, trueDOM, falseDOM) => {
     const domElement = document.querySelector(element);
 
     domElement.rawDOM = domElement.innerHTML;
-    domElement.trueDOM = trueDOM;
-    domElement.falseDOM = falseDOM;
+    domElement.trueDOM = trueDOM.innerHTML;
+    domElement.falseDOM = falseDOM.innerHTML;
 
     condition.subscribers.push(domElement);
 
-    domElement.innerHTML = condition.condition ? eval('`' + domElement.innerHTML + '`') : "";
+    domElement.innerHTML = condition.condition ? eval('`' + domElement.trueDOM + '`') : eval('`' + domElement.falseDOM + '`');
     return domElement;
 }
 
@@ -67,28 +65,22 @@ export const conditionalStore = (condition) => {
         subscribers: []
     };
 
-    let proxyState = new Proxy(state, {
+    return new Proxy(state, {
         get: (target, prop) => target[prop],
         set: (target, prop, value) => {
             target[prop] = value;
 
-            if(prop === "condition") {
+            if (prop === "condition") {
                 // Uncomment the below line for debugging
                 // console.log("Condition: ", target[prop]);
 
                 target["subscribers"].forEach(subscriber => {
-                    if(target["condition"]) {
-                        updateHook(subscriber, subscriber.trueDOM);
-                    } else {
-                        updateHook(subscriber, subscriber.falseDOM);
-                    }
+                    target["condition"] ? updateHook(subscriber, subscriber.trueDOM) : updateHook(subscriber, subscriber.falseDOM);
                 })
             }
 
             return true;
         }
     });
-
-    return proxyState;
 }
 // PowerJS ends here..
