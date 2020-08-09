@@ -1,5 +1,5 @@
 // Start building your app from here..
-import { hook, statefulHook, inject, conditionalHook, store, conditionalStore, loopHook, asyncStore, asyncHook, reactiveFunction } from './power.js';
+import { hook, statefulHook, inject, conditionalHook, store, conditionalStore, loopHook, asyncStore, asyncHook, reactiveFunction } from './Vanilla-Charger.js';
 
 const changeLogger = () => console.log('Hello World');
 reactiveFunction(changeLogger);
