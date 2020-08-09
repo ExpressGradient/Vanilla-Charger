@@ -1,4 +1,4 @@
-// PowerJS starts here..
+// Vanilla-Charger starts here..
 import  * as data  from './main.js';
 
 export const hook = (element) => {
@@ -151,4 +151,4 @@ export const reactiveFunction = (fn) => reactiveFunctions.push(fn);
 export const reactiveHook = () => {
     reactiveFunctions.forEach(fn => fn());
 }
-// PowerJS ends here..
+// Vanilla-Charger ends here..
