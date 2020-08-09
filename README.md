@@ -7,8 +7,7 @@ Also, these functions are fully hackable. You can tweak according to your usage 
 This makes PowerJS boilerplate less and gives you full power over what you write.  
 
 ## TODO
-1. Looping items and async await on components.
-2. Make it more component driven and user-friendly to write.
+1. Make it more component driven and user-friendly to write.
 
 ## Contribution
 Start by forking it and using it, get some ideas, try them.  

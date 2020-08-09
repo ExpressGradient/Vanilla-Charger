@@ -83,4 +83,47 @@ export const conditionalStore = (condition) => {
         }
     });
 }
+
+export const loopHook = (element, data) => {
+    const loopElement = document.querySelector(element);
+    loopElement.itemDOM = loopElement.innerHTML;
+    loopElement.innerHTML = "";
+
+    data.forEach(item => loopElement.innerHTML += eval('`' + loopElement.itemDOM + '`'));
+
+    return loopElement;
+}
+
+export const asyncStore = (asyncData) => {
+    let state = {
+        value: asyncData,
+        subscribers: []
+    }
+
+    return new Proxy(state, {
+        get: (target, prop) => target[prop],
+        set: (target, prop, setValue) => {
+            target[prop] = setValue;
+
+            if(prop === 'value') {
+                target['subscribers'].forEach(subscriber => subscriber.innerHTML = eval('`' + subscriber.asyncItem + '`'));
+            }
+
+            return true;
+        }
+    });
+}
+
+export const asyncHook = (element, asyncStore, placeHolder, asyncItem) => {
+    const asyncElement = document.querySelector(element);
+    const placeHolderDOM = document.querySelector(placeHolder);
+    const asyncItemDOM = document.querySelector(asyncItem);
+    asyncElement.placeHolder = placeHolderDOM.innerHTML;
+    asyncElement.asyncItem = asyncItemDOM.innerHTML;
+    asyncElement.innerHTML = asyncElement.placeHolder;
+
+    asyncStore['subscribers'].push(asyncElement);
+
+    return asyncElement;
+}
 // PowerJS ends here..

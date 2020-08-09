@@ -8,17 +8,17 @@
     <meta name="author" content="Express Gradient">
 </head>
 <body>
-    <h1 class="heading">PowerJS</h1>
-    <h1 class="heading">Data Interpolation</h1>
+    <h1>PowerJS</h1>
+    <h1>Data Interpolation</h1>
     <div class="component">
         <h1>Greetings ${data.firstname} ${data.lastname}</h1>
         <p>Hey ${data.firstname}, didn't think that you can interpolate</p>
     </div>
 
-    <h1 class="heading">Component Injection</h1>
+    <h1>Component Injection</h1>
     <div id="render-div"></div>
 
-    <h1 class="heading">Conditional Rendering</h1>
+    <h1>Conditional Rendering</h1>
     <div>
         <div class="conditional-block">
             <div class="truth-block">
@@ -32,17 +32,32 @@
         <button class="conditional-button">Toggle</button>
     </div>
 
-    <h1 class="heading">State Example</h1>
+    <h1>State Example</h1>
     <div>
         <h1 id="counter">Count: ${data.count.value}</h1>
 
         <button class="increment-button">Increment</button>
     </div>
 
-    <h1 class="heading">State Example</h1>
+    <h1>State Example</h1>
     <div>
         <h1 id="textDisplay">Hello ${data.name.value}</h1>
         <label>Enter Name: <input type="text"></label>
+    </div>
+
+    <h1>Looping over items</h1>
+    <div class="loop-block">
+        <p>${item}</p>
+    </div>
+
+    <h1>Async Await</h1>
+    <div class="async-block">
+        <div class="placeHolder">
+            <p>Loading...</p>
+        </div>
+        <div class="async-item">
+            <p>${data.asyncData.value}</p>
+        </div>
     </div>
 
     <script defer type="module" src="./main.js"></script>
