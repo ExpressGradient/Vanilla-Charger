@@ -1,26 +1,32 @@
 // PowerJS starts here..
-import { data } from './main.js';
+import  * as data  from './main.js';
 
 export const hook = (element) => {
     const domElement = document.querySelector(element);
     domElement.innerHTML = eval('`' + domElement.innerHTML + '`');
+    reactiveHook();
     return domElement;
 }
 
 export const statefulHook = (element, store) => {
     const domElement = document.querySelector(element);
-
     domElement.rawDOM = domElement.innerHTML;
+
     store.subscribers.push(domElement);
 
     domElement.innerHTML = eval('`' + domElement.innerHTML + '`');
+    reactiveHook();
     return domElement;
 }
 
-const updateHook = (hook, updateDOM) => hook.innerHTML = eval('`' + updateDOM + '`');
+const updateHook = (hook, updateDOM) => {
+    hook.innerHTML = eval('`' + updateDOM + '`');
+    reactiveHook();
+}
 
 export const inject = (from, to) => {
     to.innerHTML += from.innerHTML;
+    reactiveHook();
 }
 
 export const store = (value) => {
@@ -36,6 +42,7 @@ export const store = (value) => {
                 target[prop] = inputValue;
                 target["subscribers"].forEach(subscriber => updateHook(subscriber, subscriber.rawDOM));
 
+                reactiveHook();
                 // Uncomment the below for debugging
                 // console.log("State: ", target[prop]);
             } else if (prop === "subscribers") {
@@ -56,6 +63,7 @@ export const conditionalHook = (element, condition, trueDOM, falseDOM) => {
     condition.subscribers.push(domElement);
 
     domElement.innerHTML = condition.condition ? eval('`' + domElement.trueDOM + '`') : eval('`' + domElement.falseDOM + '`');
+    reactiveHook();
     return domElement;
 }
 
@@ -76,7 +84,9 @@ export const conditionalStore = (condition) => {
 
                 target["subscribers"].forEach(subscriber => {
                     target["condition"] ? updateHook(subscriber, subscriber.trueDOM) : updateHook(subscriber, subscriber.falseDOM);
-                })
+                });
+
+                reactiveHook();
             }
 
             return true;
@@ -89,7 +99,10 @@ export const loopHook = (element, data) => {
     loopElement.itemDOM = loopElement.innerHTML;
     loopElement.innerHTML = "";
 
-    data.forEach(item => loopElement.innerHTML += eval('`' + loopElement.itemDOM + '`'));
+    data.forEach(item => {
+        loopElement.innerHTML += eval('`' + loopElement.itemDOM + '`');
+        reactiveHook();
+    });
 
     return loopElement;
 }
@@ -107,6 +120,8 @@ export const asyncStore = (asyncData) => {
 
             if(prop === 'value') {
                 target['subscribers'].forEach(subscriber => subscriber.innerHTML = eval('`' + subscriber.asyncItem + '`'));
+
+                reactiveHook();
             }
 
             return true;
@@ -124,6 +139,16 @@ export const asyncHook = (element, asyncStore, placeHolder, asyncItem) => {
 
     asyncStore['subscribers'].push(asyncElement);
 
+    reactiveHook();
+
     return asyncElement;
+}
+
+export const reactiveFunctions = [];
+
+export const reactiveFunction = (fn) => reactiveFunctions.push(fn);
+
+export const reactiveHook = () => {
+    reactiveFunctions.forEach(fn => fn());
 }
 // PowerJS ends here..
